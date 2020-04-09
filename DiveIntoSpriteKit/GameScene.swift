@@ -12,6 +12,7 @@ import SpriteKit
 class GameScene: SKScene {
     //making the player rocket
     let player = SKSpriteNode(imageNamed: "player rocket")
+    var touchingPlayer = false
     override func didMove(to view: SKView) {
         player.position.x = -400
         // making the rocket show infront of the space dust
@@ -34,15 +35,33 @@ class GameScene: SKScene {
         }
         
     }
-
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
         // this method is called when the user touches the screen
+        guard let touch = touches.first else { return }
+        let location = touch.location(in: self)
+        let tappedNodes = nodes(at: location)
+        
+        if tappedNodes.contains(player) {
+            touchingPlayer = true
+        }
+        
     }
-
+    // making the player able to move the rocket 
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard touchingPlayer else { return }
+        guard let touch = touches.first else { return }
+        
+        let location = touch.location(in: self)
+        player.position = location
+    }
+    
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         // this method is called when the user stops touching the screen
+        touchingPlayer = false
     }
-
+    
     override func update(_ currentTime: TimeInterval) {
         // this method is called before each frame is rendered
     }
