@@ -10,7 +10,13 @@ import SpriteKit
 
 @objcMembers
 class GameScene: SKScene {
+    //making the player rocket
+    let player = SKSpriteNode(imageNamed: "player rocket")
     override func didMove(to view: SKView) {
+        player.position.x = -400
+        // making the rocket show infront of the space dust
+        player.zPosition = 1
+        addChild(player)
         
         // this method is called when your gamescene is ready to run
         
