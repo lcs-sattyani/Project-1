@@ -11,10 +11,22 @@ import SpriteKit
 @objcMembers
 class GameScene: SKScene {
     override func didMove(to view: SKView) {
-        // this method is called when your game scene is ready to run
+        
+        // this method is called when your gamescene is ready to run
+        
+        // Make the background show up
         let background = SKSpriteNode(imageNamed: "space.jpg")
         background.zPosition = -1
         addChild(background)
+        
+        // Try to load the Space Dust particle emitter
+        if let particles = SKEmitterNode(fileNamed: "Space-Dust") {
+            // If the particle emitter file is found, add it to the scene
+            particles.advanceSimulationTime(10)
+            particles.position.x = 512
+            addChild(particles)
+        }
+        
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
