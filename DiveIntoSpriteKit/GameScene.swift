@@ -13,6 +13,8 @@ class GameScene: SKScene {
     //making the player rocket
     let player = SKSpriteNode(imageNamed: "player rocket")
     var touchingPlayer = false
+    // optional timer
+    var gameTimer: Timer?
     override func didMove(to view: SKView) {
         player.position.x = -400
         // making the rocket show infront of the space dust
@@ -32,6 +34,11 @@ class GameScene: SKScene {
             particles.advanceSimulationTime(10)
             particles.position.x = 512
             addChild(particles)
+            
+            gameTimer = Timer.scheduledTimer(timeInterval:0.35, target: self, selector: #selector(createEnemy), userInfo: nil, repeats: true)
+            
+            
+            
         }
         
     }
@@ -64,6 +71,18 @@ class GameScene: SKScene {
     
     override func update(_ currentTime: TimeInterval) {
         // this method is called before each frame is rendered
+    }
+    
+    func createEnemy() {
+        // creating asteroids
+        let sprite = SKSpriteNode(imageNamed: "asteroid")
+        sprite.position = CGPoint(x: 1200, y: Int.random(in: -350...350))
+        sprite.name = "enemy"
+        sprite.zPosition = 1
+        addChild(sprite)
+        sprite.physicsBody = SKPhysicsBody(texture: sprite.texture!, size: sprite .size)
+        sprite.physicsBody?.velocity = CGVector(dx: -500, dy: 0)
+        sprite.physicsBody?.linearDamping = 0
     }
 }
 

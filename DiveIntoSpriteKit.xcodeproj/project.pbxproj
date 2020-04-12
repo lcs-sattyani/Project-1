@@ -16,6 +16,7 @@
 		51C6E4CE1F951D59001794D5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 51C6E4CC1F951D59001794D5 /* LaunchScreen.storyboard */; };
 		55722BF2243BB0FB00A1E197 /* Space-Dust.sks in Resources */ = {isa = PBXBuildFile; fileRef = 55722BF1243BB0FB00A1E197 /* Space-Dust.sks */; };
 		558BD6CA243F767D0099F8C3 /* player rocket in Resources */ = {isa = PBXBuildFile; fileRef = 558BD6C9243F767D0099F8C3 /* player rocket */; };
+		55EE753E244259DA0005D449 /* asteroid in Resources */ = {isa = PBXBuildFile; fileRef = 55EE753D244259DA0005D449 /* asteroid */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		51C6E4CF1F951D59001794D5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		55722BF1243BB0FB00A1E197 /* Space-Dust.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = "Space-Dust.sks"; sourceTree = "<group>"; };
 		558BD6C9243F767D0099F8C3 /* player rocket */ = {isa = PBXFileReference; lastKnownFileType = file; name = "player rocket"; path = "../../Assets/Project1/player rocket"; sourceTree = "<group>"; };
+		55EE753D244259DA0005D449 /* asteroid */ = {isa = PBXFileReference; lastKnownFileType = file; name = asteroid; path = ../../Assets/Project1/asteroid; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +67,7 @@
 				51C6E4BD1F951D59001794D5 /* AppDelegate.swift */,
 				51C6E4BF1F951D59001794D5 /* GameScene.sks */,
 				51C6E4C31F951D59001794D5 /* GameScene.swift */,
+				55EE753D244259DA0005D449 /* asteroid */,
 				558BD6C9243F767D0099F8C3 /* player rocket */,
 				55722BF1243BB0FB00A1E197 /* Space-Dust.sks */,
 				51C6E4C51F951D59001794D5 /* GameViewController.swift */,
@@ -135,6 +138,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55EE753E244259DA0005D449 /* asteroid in Resources */,
 				51C6E4C91F951D59001794D5 /* Main.storyboard in Resources */,
 				51C6E4C01F951D59001794D5 /* GameScene.sks in Resources */,
 				51C6E4CB1F951D59001794D5 /* Assets.xcassets in Resources */,
