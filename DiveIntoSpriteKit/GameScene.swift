@@ -9,12 +9,14 @@
 import SpriteKit
 
 @objcMembers
-class GameScene: SKScene {
+class GameScene: SKScene, SKPhysicsContactDelegate{
     //making the player rocket
     let player = SKSpriteNode(imageNamed: "player rocket")
     var touchingPlayer = false
     // optional timer
     var gameTimer: Timer?
+    
+    
     override func didMove(to view: SKView) {
         player.position.x = -400
         // making the rocket show infront of the space dust
@@ -37,8 +39,10 @@ class GameScene: SKScene {
             
             gameTimer = Timer.scheduledTimer(timeInterval:0.35, target: self, selector: #selector(createEnemy), userInfo: nil, repeats: true)
             
+            player.physicsBody = SKPhysicsBody(texture: player.texture!, size: player.size)
+            player.physicsBody?.categoryBitMask = 1
             
-            
+            physicsWorld.contactDelegate = self
         }
         
     }
@@ -83,6 +87,28 @@ class GameScene: SKScene {
         sprite.physicsBody = SKPhysicsBody(texture: sprite.texture!, size: sprite .size)
         sprite.physicsBody?.velocity = CGVector(dx: -500, dy: 0)
         sprite.physicsBody?.linearDamping = 0
+        
+        //Colliding With Asteroids Part
+        sprite.physicsBody?.contactTestBitMask = 1
+        sprite.physicsBody?.categoryBitMask = 0
+        
+        func didBegin(_ contact: SKPhysicsContact) {
+            guard let nodeA = contact.bodyA.node else {
+                return}
+            guard let nodeB = contact.bodyB.node else {
+                return}
+            
+            if nodeA == player {
+                playerHit(nodeB)
+            } else {
+                playerHit(nodeA)
+            }
+        }
+        func playerHit(_ node: SKNode) {
+            player.removeFromParent()
+        }
+        
+        
     }
 }
 
