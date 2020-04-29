@@ -16,6 +16,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     // optional timer
     var gameTimer: Timer?
     
+    let scoreLabel = SKLabelNode(fontNamed: "Avenir-NextCondensed-Bold")
+    
+    //Shows text for score at the top of ipad screen
+    var score = 0 {
+        didSet {
+            scoreLabel.text = "SCORE:  \(score)"
+        }
+        
+    }
+    
     
     override func didMove(to view: SKView) {
         player.position.x = -400
@@ -43,7 +53,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
             player.physicsBody?.categoryBitMask = 1
             
             physicsWorld.contactDelegate = self
+            
+            
         }
+        // Making score label at the top of the screen
+        scoreLabel.zPosition = 2
+        scoreLabel.position.y = 300
+        addChild(scoreLabel)
+        
+        score = 0
         
     }
     
@@ -78,9 +96,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     }
     
     func createEnemy() {
+         createBonus()
         // creating asteroids
         let sprite = SKSpriteNode(imageNamed: "asteroid")
         sprite.position = CGPoint(x: 1200, y: Int.random(in: -350...350))
+        sprite.scale(to: CGSize(width: 125, height: 125))
         sprite.name = "enemy"
         sprite.zPosition = 1
         addChild(sprite)
@@ -110,5 +130,58 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         
         
     }
+    
+    func createBonus() {
+       
+        // creating asteroids
+        let sprite = SKSpriteNode(imageNamed: "energy.png")
+        sprite.position = CGPoint(x: 1200, y: Int.random(in: -350...350))
+        sprite.name = "bonus"
+        sprite.zPosition = 1
+        addChild(sprite)
+        sprite.physicsBody = SKPhysicsBody(texture: sprite.texture!, size: sprite .size)
+        sprite.physicsBody?.velocity = CGVector(dx: -500, dy: 0)
+        sprite.physicsBody?.linearDamping = 0
+        
+        //Colliding With Asteroids Part
+        sprite.physicsBody?.contactTestBitMask = 1
+        sprite.physicsBody?.categoryBitMask = 0
+        
+        
+        
+        
+        
+        sprite.physicsBody?.collisionBitMask = 0
+        
+    }
+    
+    func didBegin(_ contact: SKPhysicsContact) {
+        guard let nodeA = contact.bodyA.node else {
+            return
+            
+        }
+        guard let nodeB = contact.bodyB.node else {
+            return
+            
+        }
+        
+        if nodeA == player {
+            playerHit(nodeB)
+        } else {
+            playerHit(nodeA)
+        }
+    }
+    
+    func playerHit(_ node: SKNode) {
+        if node.name == "bonus" {
+            score += 1
+            node.removeFromParent()
+            return
+        }
+        player.removeFromParent()
+    }
+    
+    
+    
 }
 
