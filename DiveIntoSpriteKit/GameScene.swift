@@ -16,6 +16,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     // optional timer
     var gameTimer: Timer?
     
+    //lets music play when game starts
+    let music = SKAudioNode(fileNamed: "cyborg-ninja.mp3")
+    
     let scoreLabel = SKLabelNode(fontNamed: "Avenir-NextCondensed-Bold")
     
     //Shows text for score at the top of ipad screen
@@ -39,6 +42,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         let background = SKSpriteNode(imageNamed: "space.jpg")
         background.zPosition = -1
         addChild(background)
+        
+        addChild(music)
         
         // Try to load the Space Dust particle emitter
         if let particles = SKEmitterNode(fileNamed: "Space-Dust") {
