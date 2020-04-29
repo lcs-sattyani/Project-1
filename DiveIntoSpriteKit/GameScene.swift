@@ -11,7 +11,7 @@ import SpriteKit
 @objcMembers
 class GameScene: SKScene, SKPhysicsContactDelegate{
     //making the player rocket
-    let player = SKSpriteNode(imageNamed: "player rocket")
+    let player = SKSpriteNode(imageNamed: "player-rocket")
     var touchingPlayer = false
     // optional timer
     var gameTimer: Timer?
