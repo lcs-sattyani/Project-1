@@ -101,7 +101,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     }
     
     func createEnemy() {
-         createBonus()
+        createBonus()
         // creating asteroids
         let sprite = SKSpriteNode(imageNamed: "asteroid")
         sprite.position = CGPoint(x: 1200, y: Int.random(in: -350...350))
@@ -131,13 +131,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         }
         func playerHit(_ node: SKNode) {
             player.removeFromParent()
+            
         }
         
         
     }
     
     func createBonus() {
-       
+        
         // creating asteroids
         let sprite = SKSpriteNode(imageNamed: "energy.png")
         sprite.position = CGPoint(x: 1200, y: Int.random(in: -350...350))
@@ -181,9 +182,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         if node.name == "bonus" {
             score += 1
             node.removeFromParent()
+            
+            let sound = SKAction.playSoundFileNamed("bonus.wav", waitForCompletion: false)
+            run(sound)
+            
             return
+        } else if node.name == "enemy" {
+            let explosionSound = SKAction.playSoundFileNamed("explosion.wav", waitForCompletion: false)
+            run(explosionSound)
+            player.removeFromParent()
         }
-        player.removeFromParent()
+        
+        
     }
     
     
