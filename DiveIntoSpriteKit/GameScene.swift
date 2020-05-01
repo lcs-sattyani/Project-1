@@ -131,6 +131,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         }
         func playerHit(_ node: SKNode) {
             player.removeFromParent()
+            if let particles = SKEmitterNode(fileNamed: "Explosion.sks") {
+                particles.position = player.position
+                particles.zPosition = 3
+                addChild(particles)
+            }
+            
             
         }
         
@@ -187,10 +193,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
             run(sound)
             
             return
-        } else if node.name == "enemy" {
+        }
+        else if node.name == "enemy" {
             let explosionSound = SKAction.playSoundFileNamed("explosion.wav", waitForCompletion: false)
             run(explosionSound)
             player.removeFromParent()
+            music.removeFromParent()
+            
+            let gameOver = SKSpriteNode(imageNamed: "gameOver-1")
+            gameOver.zPosition = 10
+            addChild(gameOver)
         }
         
         
